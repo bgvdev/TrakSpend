@@ -85,15 +85,15 @@ Tokens expire (`SANCTUM_TOKEN_EXPIRATION`, default 7 days). `PATCH /auth/passwor
 
 ```
 src/
-  app/           # Next.js App Router pages: login, register, dashboard, settings
+  app/           # Next.js App Router pages: dashboard, expenses, categories, reports, settings, admin, login/register/forgot-/reset-password
   components/    # feature components (ExpenseForm/List/Filters, Category*, Toast, …)
   components/ui/ # design-system primitives: Button, Input, Field, Card, SidePanel, Select, Chip, …
   components/layout/ # AppShell, Page, AuthCard, RequireAuth
-  hooks/         # useAuth, useExpenses, useExpenseStats, useReportsData, useCategories, useToast
+  hooks/         # useAuth, useExpenses, useExpenseStats, useReportsData, useCategories, useTheme, useToast
   lib/           # api.ts (fetch wrapper), expenseQuery.ts (filters → query params), types.ts, utils.ts
 ```
 
-**Theming.** Light/dark is driven by semantic tokens (`background`, `surface`, `subtle`, `border`, `foreground`, `muted`, `faint`, `primary`, `accent`, `danger`, `success`, `warning`) defined as RGB channels in `globals.css` and mapped in `tailwind.config.ts` (`darkMode: "class"`). `ThemeProvider` (`hooks/useTheme.tsx`) stores light/dark/system in `localStorage` and an inline script in `layout.tsx` applies the `dark` class before first paint. Never use raw palette classes (`white/…`, `indigo-…`, hex) in markup — use the tokens and the shared `components/ui/` primitives (Button, Input, Field, Card, Select, Chip, Badge, Alert, StatCard, PageHeader, …). Only data-driven category colors go in inline styles.
+**Theming.** Light/dark is driven by semantic tokens (`background`, `surface`, `subtle`, `border`, `foreground`, `muted`, `faint`, `primary`, `accent`, `danger`, `success`, `warning`) defined as RGB channels in `globals.css` and mapped in `tailwind.config.ts` (`darkMode: "class"`). `ThemeProvider` (`hooks/useTheme.tsx`) stores light/dark/system in `localStorage` and an inline script in `layout.tsx` applies the `dark` class before first paint. Color palettes (`classic` | `ocean` | `forest` | `sunset`) layer on top of light/dark: each non-classic palette overrides the tinted tokens under `[data-palette="…"]` and `.dark[data-palette="…"]` in `globals.css`, set as `data-palette` on `<html>` by the same pre-paint script (classic = no attribute). Adding a palette means touching `globals.css`, `PALETTES` in `useTheme.tsx` and `PALETTE_OPTIONS` in `ui/ThemeToggle.tsx`; the picker lives in Settings → Appearance. `layout/BackgroundShapes.tsx` draws decorative shapes in `primary`/`accent` so they follow the palette. Never use raw palette classes (`white/…`, `indigo-…`, hex) in markup — use the tokens and the shared `components/ui/` primitives (Button, Input, Field, Card, Select, Chip, Badge, Alert, StatCard, PageHeader, …). Only data-driven category colors go in inline styles.
 
 `AuthProvider` wraps the entire app in `layout.tsx`; all pages that need auth check `useAuth()`. State hooks are standalone and own one API resource each: `useExpenses` (one API page for a filter + sort + page; stale responses are dropped, and `refetch()` reloads in place), `useExpenseMutations` (create/update/delete — they hold no list state, so callers `refetch()` after a write), `useExpenseStats` (the `/stats` aggregates, behind the reports, dashboard and categories pages), `useCategories` (CRUD over the user's own categories). `lib/expenseQuery.ts` owns `FilterState` and turns it into query params; it never filters a list itself. On `/expenses` the side-panel filters are a draft sent only on **Apply**, search is sent on Enter or its arrow button, and removing an applied chip or clicking a column header applies at once. The page opens on the current month (`DEFAULT_FILTERS`); "Clear all" returns to `EMPTY_FILTERS` (all time). `useToast` provides the app-wide toast notifications. Add/edit forms and the expense filters open in a right-hand `SidePanel` (full-width on phones), not a centered modal. Every delete goes through `ConfirmDialog`, which runs the action, stays open showing the API error if it fails, and closes on success; shared `ui/` primitives also back the category color/icon pickers.
 
@@ -101,7 +101,7 @@ src/
 
 Two tiers, split by purpose:
 
-- **Reference data (always):** `CategorySeeder` (6 default global categories with `user_id = null`) and `PaymentMethodSeeder` (6 payment methods). Both are idempotent (`firstOrCreate` on `slug`), and `docker-entrypoint.sh` runs **both** on every boot in all environments — production included — so the reference data always exists.
+- **Reference data (always):** `CategorySeeder` (6 default global categories with `user_id = null`) and `PaymentMethodSeeder` (6 payment methods). Both are idempotent (`firstOrCreate` — categories on `name` + `user_id = null`, payment methods on `slug`), and `docker-entrypoint.sh` runs **both** on every boot in all environments — production included — so the reference data always exists.
 - **Test fixtures (gated):** `DatabaseSeeder` additionally creates a test user (`test@example.com / password`) only when `SEED_TEST_USER=true`. The entrypoint runs the full `DatabaseSeeder` only under that flag. **Never set `SEED_TEST_USER=true` in production.**
 
 ## Deployment
@@ -185,6 +185,13 @@ npm run dev    # starts on :3000
 npm run build
 npm run lint
 ```
+
+## README maintenance
+
+Keep `README.md` (root), `frontend/README.md` and `backend/README.md` current:
+
+- When adding or changing a **major feature** (new page, endpoint group, user-facing capability, env var, setup/deploy step), update the affected README(s) — and this file, where it documents the area — in the same change.
+- **Before creating a PR**, re-check all three READMEs against the branch's diff and include any needed updates in the PR.
 
 ## Reference docs
 

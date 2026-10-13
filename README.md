@@ -1,8 +1,18 @@
 # Expense Tracker
 
-A full-stack expense tracking web app — log expenses by category, view your history, and manage your account.
+A full-stack expense tracking web app — log expenses by category and payment
+method, search and filter your history, see reports, and manage your account.
 
 **Live app:** https://trakspend.vercel.app
+
+## Features
+
+- Expenses with server-side search, filters, sorting, pagination and CSV export
+- Personal categories (color + icon) alongside shared defaults
+- Dashboard and reports with charts by category, payment method, day and month
+- Accounts with password reset by emailed code
+- Light/dark/system theme and four color palettes (Classic, Ocean, Forest, Sunset)
+- Admin panel for users, roles and global categories
 
 ## Stack
 
@@ -12,6 +22,9 @@ A full-stack expense tracking web app — log expenses by category, view your hi
 | Backend | Laravel 13, PHP 8.3, Laravel Sanctum |
 | Database | PostgreSQL 15 |
 | Infra | Docker Compose (local), Vercel (frontend), Render (backend), Neon (database) |
+
+Each app has its own README with more detail:
+[frontend/README.md](frontend/README.md) · [backend/README.md](backend/README.md)
 
 ## Getting started
 
@@ -69,4 +82,6 @@ unset, rather than silently proxying to the live backend.
 - **Backend API** → [Render](https://expense-tracker-singapore.onrender.com)
 - **Database** → [Neon](https://neon.tech) (PostgreSQL 15)
 
-See [docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) for full setup instructions.
+Pushing to `main` deploys both apps; there is no CI, so run the backend tests
+and pint, and the frontend lint and build, before pushing. See
+[docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) for full setup instructions.
