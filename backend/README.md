@@ -1,6 +1,6 @@
-# Expense Tracker — Backend API
+# TrakSpend — Backend API
 
-Laravel 13 / PHP 8.3 REST API for the [Expense Tracker](../README.md). Serves
+Laravel 13 / PHP 8.3 REST API for [TrakSpend](../README.md). Serves
 JSON under `/api/*` to the Next.js frontend, which proxies every request through
 its own origin, so the API never deals with CORS from the browser.
 

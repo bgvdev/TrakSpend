@@ -1,7 +1,7 @@
-# Expense Tracker — Frontend
+# TrakSpend — Frontend
 
-Next.js 15 (App Router) / React 19 / TypeScript / Tailwind CSS client for the
-[Expense Tracker](../README.md). Deployed on Vercel at
+Next.js 15 (App Router) / React 19 / TypeScript / Tailwind CSS client for
+[TrakSpend](../README.md). Deployed on Vercel at
 https://trakspend.vercel.app.
 
 ## Features
