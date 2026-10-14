@@ -43,7 +43,7 @@ Store backups in a safe location (S3, local encrypted drive, etc.). Do not commi
 set -e
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-BACKUP_DIR="${HOME}/backups/expense-tracker"
+BACKUP_DIR="${HOME}/backups/trakspend"
 FILENAME="${BACKUP_DIR}/backup_${TIMESTAMP}.sql.gz"
 
 mkdir -p "$BACKUP_DIR"

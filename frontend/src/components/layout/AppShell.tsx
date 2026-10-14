@@ -20,7 +20,7 @@ const NAV_ITEMS = [
 const ADMIN_NAV_ITEM = { href: "/admin", label: "Admin", icon: "admin_panel_settings" } as const;
 
 function getPageTitle(pathname: string): string {
-  return [...NAV_ITEMS, ADMIN_NAV_ITEM].find((n) => pathname.startsWith(n.href))?.label ?? "Expense Tracker";
+  return [...NAV_ITEMS, ADMIN_NAV_ITEM].find((n) => pathname.startsWith(n.href))?.label ?? "TrakSpend";
 }
 
 function Logo() {
@@ -29,7 +29,7 @@ function Logo() {
       <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-sm font-semibold text-primary-foreground">
         ₹
       </span>
-      <span className="text-sm font-semibold tracking-tight text-foreground">Expense Tracker</span>
+      <span className="text-sm font-semibold tracking-tight text-foreground">TrakSpend</span>
     </Link>
   );
 }

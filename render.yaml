@@ -30,7 +30,7 @@ services:
       - key: LOG_LEVEL
         value: error
       - key: APP_NAME
-        value: "Expense Tracker"
+        value: "TrakSpend"
       - key: APP_URL
         sync: false             # public URL of this service (SMTP EHLO domain, links)
       - key: BCRYPT_ROUNDS
