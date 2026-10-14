@@ -179,9 +179,9 @@ cd frontend
 docker build \
   --target production \
   --build-arg BACKEND_URL=https://expense-tracker-singapore.onrender.com \
-  -t expense-tracker-web:prod .
+  -t trakspend-web:prod .
 
-docker run -p 3000:3000 expense-tracker-web:prod
+docker run -p 3000:3000 trakspend-web:prod
 ```
 
 Note that `docker-compose.yml` uses the plain `node:20-alpine` image for `web`

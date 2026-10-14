@@ -16,7 +16,7 @@ class PasswordResetMail extends Mailable
 
     public function envelope(): Envelope
     {
-        return new Envelope(subject: 'Your Expense Tracker Password Reset OTP');
+        return new Envelope(subject: 'Your '.config('app.name').' Password Reset OTP');
     }
 
     public function content(): Content

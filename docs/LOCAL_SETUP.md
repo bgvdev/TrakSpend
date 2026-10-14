@@ -20,8 +20,8 @@ The Docker path is recommended — it requires nothing except Docker.
 ### 1. Clone and enter the repo
 
 ```bash
-git clone <your-repo-url> expense-tracker
-cd expense-tracker
+git clone https://github.com/bgvdev/TrakSpend.git TrakSpend
+cd TrakSpend
 ```
 
 ### 2. Create the root env file

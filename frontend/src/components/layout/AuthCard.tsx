@@ -18,9 +18,12 @@ export default function AuthCard({ title, description, children, footer }: AuthC
 
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center text-center">
-          <span className="mb-5 flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-lg font-semibold text-primary-foreground">
-            ₹
-          </span>
+          <div className="mb-5 flex items-center gap-2.5">
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-lg font-semibold text-primary-foreground">
+              ₹
+            </span>
+            <span className="text-lg font-semibold tracking-tight text-foreground">TrakSpend</span>
+          </div>
           <h1 className="text-2xl font-semibold tracking-tight text-foreground">{title}</h1>
           {description && <p className="mt-1.5 text-sm text-muted">{description}</p>}
         </div>

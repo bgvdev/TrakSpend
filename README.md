@@ -1,4 +1,4 @@
-# Expense Tracker
+# TrakSpend
 
 A full-stack expense tracking web app — log expenses by category and payment
 method, search and filter your history, see reports, and manage your account.

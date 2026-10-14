@@ -6,7 +6,7 @@
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `APP_NAME` | No | `Expense Tracker` | Display name used in emails and logs |
+| `APP_NAME` | No | `TrakSpend` | Display name used in emails and logs |
 | `APP_ENV` | Yes | `local` | Runtime environment: `local`, `staging`, `production` |
 | `APP_KEY` | Yes | — | 32-byte AES-256 key. Run `php artisan key:generate` |
 | `APP_DEBUG` | Yes | `false` | Set `true` only in local/staging. Exposes stack traces |
