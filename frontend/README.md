@@ -105,5 +105,5 @@ but **never** run `npm run build` in the running `web` container: it overwrites
 the dev server's `.next/`. Use instead:
 
 ```bash
-docker compose run --rm --no-deps -e BACKEND_URL=http://api:8000 web npm run build
+docker compose run --rm --no-deps -v /app/.next -e NODE_ENV=production -e BACKEND_URL=http://api:8000 web npm run build
 ```
