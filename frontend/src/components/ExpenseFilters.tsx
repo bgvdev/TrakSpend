@@ -7,7 +7,7 @@ import { cn } from "@/lib/cn";
 import Chip from "@/components/ui/Chip";
 import Input from "@/components/ui/Input";
 import Button, { IconButton } from "@/components/ui/Button";
-import Field from "@/components/ui/Field";
+import DateRangeInputs from "@/components/ui/DateRangeInputs";
 import SidePanel from "@/components/ui/SidePanel";
 import MultiSelect from "@/components/ui/MultiSelect";
 import Icon from "@/components/ui/Icon";
@@ -72,26 +72,13 @@ function DrawerContent({ filters, categories, paymentMethods, onChange }: Drawer
           ))}
         </div>
         {filters.datePreset === "custom" && (
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            <Field label="From" htmlFor="filter-from">
-              <Input
-                id="filter-from"
-                type="date"
-                size="sm"
-                value={filters.customFrom ?? ""}
-                onChange={(e) => onChange({ ...filters, customFrom: e.target.value || null })}
-              />
-            </Field>
-            <Field label="To" htmlFor="filter-to">
-              <Input
-                id="filter-to"
-                type="date"
-                size="sm"
-                value={filters.customTo ?? ""}
-                onChange={(e) => onChange({ ...filters, customTo: e.target.value || null })}
-              />
-            </Field>
-          </div>
+          <DateRangeInputs
+            idPrefix="filter"
+            className="mt-3"
+            from={filters.customFrom}
+            to={filters.customTo}
+            onChange={(customFrom, customTo) => onChange({ ...filters, customFrom, customTo })}
+          />
         )}
       </FilterSection>
 

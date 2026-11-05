@@ -3,8 +3,7 @@
 import { useState } from "react";
 import type { DateRange } from "@/hooks/useReportsData";
 import Chip from "@/components/ui/Chip";
-import Field from "@/components/ui/Field";
-import Input from "@/components/ui/Input";
+import DateRangeInputs from "@/components/ui/DateRangeInputs";
 
 export type ReportDatePreset = "all" | "month" | "last_month" | "3months" | "6months" | "year" | "custom";
 
@@ -78,26 +77,13 @@ export default function ReportDateFilter({ onChange }: Props) {
         ))}
       </div>
       {preset === "custom" && (
-        <div className="mt-3 grid max-w-sm grid-cols-2 gap-3">
-          <Field label="From" htmlFor="report-from">
-            <Input
-              id="report-from"
-              type="date"
-              size="sm"
-              value={customFrom ?? ""}
-              onChange={(e) => updateCustom(e.target.value || null, customTo)}
-            />
-          </Field>
-          <Field label="To" htmlFor="report-to">
-            <Input
-              id="report-to"
-              type="date"
-              size="sm"
-              value={customTo ?? ""}
-              onChange={(e) => updateCustom(customFrom, e.target.value || null)}
-            />
-          </Field>
-        </div>
+        <DateRangeInputs
+          idPrefix="report"
+          className="mt-3 max-w-sm"
+          from={customFrom}
+          to={customTo}
+          onChange={updateCustom}
+        />
       )}
     </div>
   );
